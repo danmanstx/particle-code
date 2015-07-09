@@ -17,9 +17,10 @@ volatile bool can_turn_light_on = false;
 #define THREE_HOURS_MILLIS (3 * 60 * 60 * 1000)
 
 void setup(){
-  pinMode(D0, INPUT_PULLDOWN );
+  // have to use D1 as D0 does not work on the photon for an interrupt
+  pinMode(D1, INPUT_PULLDOWN );
   pinMode(ledPin, OUTPUT);
-  attachInterrupt(D0, trigger_light_on, RISING);
+  attachInterrupt(D1, trigger_light_on, RISING);
   set_time = millis();
   Spark.function("LightsOn", set_light_on);
   Spark.function("LightsOff", set_light_off);
